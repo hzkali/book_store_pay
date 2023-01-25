@@ -16,7 +16,10 @@ export default function HomePage() {
       <div className="basis-1/4">
         <WalletMultiButton className='!bg-gray-900 hover:scale-105' />
       </div>
-
+      
+ {/* We display the coupon book if there's a connected wallet */}
+      {publicKey && <CouponBook />}
+      
       {/* We disable checking out without a connected wallet */}
       <Products submitTarget='/checkout' enabled={publicKey !== null} />
     </div>
