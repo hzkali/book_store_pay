@@ -27,6 +27,8 @@ Our books and poems belong to the author İsmet Özel
 ## Project Website
 
 
-[BookStore](book-store-pay.vercel.app)
+[BookStore](https://book-store-pay.vercel.app)
+<a href="https://www.google.com/" target="_blank">Google</a>
+
 
   
