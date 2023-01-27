@@ -1,6 +1,7 @@
 import { createQR, encodeURL, TransferRequestURLFields, findReference, validateTransfer, FindReferenceError, ValidateTransferError, TransactionRequestURLFields } from "@solana/pay";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { clusterApiUrl, Connection, Keypair } from "@solana/web3.js";
+import { url } from "inspector";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef } from "react";
 import BackLink from "../../components/BackLink";
@@ -37,15 +38,19 @@ export default function Checkout() {
   const network = WalletAdapterNetwork.Devnet
   const endpoint = clusterApiUrl(network)
   const connection = new Connection(endpoint)
+  
 
   // Show the QR code
   useEffect(() => {
     // window.location is only available in the browser, so create the URL in here
     const { location } = window
     const apiUrl = `${location.protocol}//${location.host}/api/makeTransaction?${searchParams.toString()}`
-    const urlParams: TransactionRequestURLFields = {
-      link: new URL(apiUrl),
-      label: "Book Store",
+    const urlParams: TransferRequestURLFields = {
+      recipient: shopAddress,
+      splToken: usdcAddress,
+      amount,
+      reference,
+      label: "Book store",
       message: "Thanks for your order! 🍪",
     }
     const solanaUrl = encodeURL(urlParams)
